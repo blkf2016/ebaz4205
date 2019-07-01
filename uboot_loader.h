@@ -17,9 +17,6 @@
 #ifndef ___UBOOT_LOADER_H___
 #define ___UBOOT_LOADER_H___
 
-#define UBOOT_LOAD_ADDR		0x04000000
-#define UBOOT_BIN_NAME		"u-boot.bin"
-
 u32 UBootLoader(void);
 
 #endif
