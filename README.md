@@ -6,4 +6,4 @@ Related software version:
 
   Buildroot:  2019.05
 
-Linux root login passoword: root
+Linux root login password: root
