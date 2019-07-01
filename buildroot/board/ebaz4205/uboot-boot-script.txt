@@ -1,0 +1,4 @@
+ext4load mmc 0:2 0x2000000 /boot/zImage
+ext4load mmc 0:2 0x1f00000 /boot/zynq-ebaz4205.dtb
+setenv bootargs "root=/dev/mmcblk0p2 rootwait"
+bootz 0x2000000 - 0x1f00000

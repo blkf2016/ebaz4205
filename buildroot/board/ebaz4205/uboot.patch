@@ -1,0 +1,98 @@
+diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+old mode 100644
+new mode 100755
+index 4dfc2c6309..ed1dd384ec
+--- a/arch/arm/dts/Makefile
++++ b/arch/arm/dts/Makefile
+@@ -234,6 +234,7 @@ dtb-$(CONFIG_ARCH_ZYNQ) += \
+ 	zynq-zc770-xm013.dtb \
+ 	zynq-zed.dtb \
+ 	zynq-zturn.dtb \
++	zynq-ebaz4205.dtb \
+ 	zynq-zybo.dtb \
+ 	zynq-zybo-z7.dtb
+ dtb-$(CONFIG_ARCH_ZYNQMP) += \
+diff --git a/arch/arm/dts/zynq-ebaz4205.dts b/arch/arm/dts/zynq-ebaz4205.dts
+new file mode 100755
+index 0000000000..5f257cf2b4
+--- /dev/null
++++ b/arch/arm/dts/zynq-ebaz4205.dts
+@@ -0,0 +1,78 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ *  Copyright (C) 2015 Andrea Merello <adnrea.merello@gmail.com>
++ *  Copyright (C) 2017 Alexander Graf <agraf@suse.de>
++ *
++ *  Based on zynq-zed.dts which is:
++ *  Copyright (C) 2011 - 2014 Xilinx
++ *  Copyright (C) 2012 National Instruments Corp.
++ *
++ */
++
++/dts-v1/;
++/include/ "zynq-7000.dtsi"
++
++/ {
++	model = "Zynq ebaz4205 Board";
++	compatible = "unknown,zynq-ebaz4205", "xlnx,zynq-7000";
++
++	aliases {
++		ethernet0 = &gem0;
++		serial0 = &uart1;
++		serial1 = &uart0;
++		mmc0 = &sdhci0;
++	};
++
++	memory@0 {
++		device_type = "memory";
++		reg = <0x0 0x10000000>;
++	};
++
++	chosen {
++		stdout-path = "serial0:115200n8";
++	};
++
++	gpio-leds {
++		compatible = "gpio-leds";
++		led_r {
++			label = "led_r";
++			gpios = <&gpio0 54 1>;
++			default-state = "off";
++		};
++
++		led_g {
++			label = "led_g";
++			gpios = <&gpio0 55 1>;
++			default-state = "off";
++		};
++	};
++};
++
++&clkc {
++	ps-clk-frequency = <33333333>;
++};
++
++&gem0 {
++	status = "okay";
++	phy-mode = "rgmii-id";
++	phy-handle = <&ethernet_phy>;
++
++	ethernet_phy: ethernet-phy@0 {
++		reg = <0x0>;
++	};
++};
++
++&sdhci0 {
++	u-boot,dm-pre-reloc;
++	status = "okay";
++};
++
++&uart0 {
++	u-boot,dm-pre-reloc;
++	status = "okay";
++};
++
++&uart1 {
++	u-boot,dm-pre-reloc;
++	status = "okay";
++};
