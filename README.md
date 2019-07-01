@@ -5,3 +5,5 @@ Related software version:
   linux:      5.1.5
 
   Buildroot:  2019.05
+
+Linux root login passoword: root
